@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yuki Sheikh — Digital Business Card</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#09090b;--card:#111113;--border:#27272a;--border2:#3f3f46;
+  --text:#fafafa;--muted:#a1a1aa;--dim:#71717a;
+  --ac:#7c3aed;--cy:#06b6d4;--go:#f59e0b;
+}
+html,body{min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:2rem 1rem;gap:1.5rem}
+
+/* CARD */
+.card{
+  width:100%;max-width:380px;
+  background:var(--card);border:1px solid var(--border2);border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04) inset;
+  position:relative;
+}
+.card-top{
+  padding:2rem 2rem 1.5rem;
+  background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.07));
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.card-top::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.2),transparent 70%);
+}
+.name{font-size:1.6rem;font-weight:900;letter-spacing:-.03em;line-height:1;margin-bottom:.3rem}
+.name span{
+  background:linear-gradient(90deg,#a78bfa,#38bdf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.title{font-size:.8rem;color:var(--muted);font-weight:500;line-height:1.5;margin-bottom:1rem;
+  border-left:2px solid var(--ac);padding-left:.65rem}
+.badges{display:flex;flex-wrap:wrap;gap:.4rem}
+.badge{font-size:.65rem;font-weight:700;padding:.2rem .55rem;border-radius:100px;
+  background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);color:#c4b5fd}
+.badge.c{background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.25);color:#67e8f9}
+.badge.g{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.25);color:#fcd34d}
+
+/* QR area */
+.card-qr{
+  display:flex;flex-direction:column;align-items:center;
+  padding:1.5rem 2rem;gap:.85rem;
+}
+.qr-frame{
+  width:176px;height:176px;
+  background:#fff;border-radius:16px;padding:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;
+}
+#qrcode canvas,#qrcode img{border-radius:8px}
+.qr-label{font-size:.72rem;color:var(--dim);text-align:center;line-height:1.5}
+.qr-label strong{color:var(--muted)}
+.qr-url{
+  font-size:.68rem;color:var(--ac);word-break:break-all;
+  text-align:center;font-weight:600;
+  background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);
+  border-radius:8px;padding:.45rem .75rem;width:100%;
+}
+
+/* Contact row */
+.card-contact{
+  padding:0 2rem 1.5rem;
+  display:flex;flex-direction:column;gap:.55rem;
+}
+.ci{display:flex;align-items:center;gap:.65rem;font-size:.8rem;color:var(--muted)}
+.ci .ico{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
+.ci a{color:var(--cy);text-decoration:none;font-weight:500}
+.ci a:hover{text-decoration:underline}
+
+/* Stats strip */
+.card-stats{
+  margin:0 2rem 2rem;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  overflow:hidden;
+}
+.stat{padding:.75rem .5rem;text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.sv{font-size:1.05rem;font-weight:800;letter-spacing:-.02em}
+.sv.go{color:var(--go)}.sv.cy{color:var(--cy)}.sv.pu{color:#a78bfa}
+.sl2{font-size:.6rem;color:var(--dim);font-weight:500;margin-top:.1rem;line-height:1.3}
+
+/* Buttons */
+.actions{display:flex;gap:.65rem;width:100%;max-width:380px;flex-wrap:wrap;justify-content:center}
+.btn-save{
+  flex:1;min-width:140px;
+  background:var(--ac);color:#fff;
+  border:none;border-radius:12px;
+  padding:.75rem 1.25rem;font-size:.85rem;font-weight:700;cursor:pointer;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 0 20px rgba(124,58,237,.35);
+}
+.btn-save:hover{opacity:.88;transform:translateY(-1px)}
+.btn-print{
+  flex:1;min-width:140px;
+  background:var(--card);color:var(--muted);
+  border:1px solid var(--border2);border-radius:12px;
+  padding:.75rem 1.25rem;font-size:.85rem;font-weight:600;cursor:pointer;
+  transition:all .2s;
+}
+.btn-print:hover{border-color:var(--border2);color:var(--text);background:#27272a}
+.note{font-size:.72rem;color:var(--dim);text-align:center;max-width:340px}
+
+@media print{
+  body{background:#fff;padding:.5rem}
+  .card{box-shadow:none;border:1px solid #e5e7eb;max-width:320px}
+  .card-top{background:#f8f5ff}
+  .name{color:#09090b}
+  .name span{background:none;-webkit-text-fill-color:#7c3aed;color:#7c3aed}
+  .title{color:#6b7280;border-color:#7c3aed}
+  .badge{background:#ede9fe;border-color:#c4b5fd;color:#6d28d9}
+  .qr-label,.qr-url,.ci,.sl2{color:#6b7280}
+  .ci a{color:#0891b2}
+  .sv.go{color:#d97706}.sv.cy{color:#0891b2}.sv.pu{color:#7c3aed}
+  .card-stats{border-color:#e5e7eb;background:#f9fafb}
+  .stat{border-color:#e5e7eb}
+  .actions,.note{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <!-- TOP -->
+  <div class="card-top">
+    <div class="name">Yuki <span>Sheikh</span></div>
+    <div class="title">Principal Technical Product Manager<br>AI &amp; Enterprise Platform Leader</div>
+    <div class="badges">
+      <span class="badge g">73 Certifications</span>
+      <span class="badge">T-Mobile · Amplity Health</span>
+      <span class="badge c">AI-Native PM</span>
+      <span class="badge">Dallas, TX</span>
+    </div>
+  </div>
+
+  <!-- QR -->
+  <div class="card-qr">
+    <div class="qr-frame">
+      <div id="qrcode"></div>
+    </div>
+    <div class="qr-label">Scan to view full profile,<br><strong>case studies &amp; KPI dashboard</strong></div>
+    <div class="qr-url">yukisheikh.github.io/getting-to-know-yuki.github.io</div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="card-contact">
+    <div class="ci"><span class="ico">📞</span><a href="tel:5732009362">573-200-9362</a></div>
+    <div class="ci"><span class="ico">✉️</span><a href="mailto:sheikhyuki@gmail.com">sheikhyuki@gmail.com</a></div>
+    <div class="ci"><span class="ico">🔗</span><a href="https://linkedin.com/in/yuki-sheikh" target="_blank">linkedin.com/in/yuki-sheikh</a></div>
+    <div class="ci"><span class="ico">📍</span><span>Dallas, TX &nbsp;·&nbsp; Open to Remote</span></div>
+  </div>
+
+  <!-- STATS -->
+  <div class="card-stats">
+    <div class="stat"><div class="sv go">$5M+</div><div class="sl2">Risk<br>Mitigated</div></div>
+    <div class="stat"><div class="sv cy">8+</div><div class="sl2">Years<br>Delivering</div></div>
+    <div class="stat"><div class="sv pu">73</div><div class="sl2">Pro<br>Certifications</div></div>
+  </div>
+</div>
+
+<!-- ACTIONS -->
+<div class="actions">
+  <button class="btn-save" onclick="saveCard()">📲 Save to Phone</button>
+  <button class="btn-print" onclick="window.print()">🖨️ Print Card</button>
+</div>
+<p class="note">Scan the QR code to open the interactive profile — works on any phone, no app needed.</p>
+
+<script>
+// Generate QR code
+new QRCode(document.getElementById('qrcode'), {
+  text: 'https://yukisheikh.github.io/getting-to-know-yuki.github.io',
+  width: 156,
+  height: 156,
+  colorDark: '#09090b',
+  colorLight: '#ffffff',
+  correctLevel: QRCode.CorrectLevel.H
+});
+
+// Save card — opens profile URL
+function saveCard() {
+  window.open('https://yukisheikh.github.io/getting-to-know-yuki.github.io', '_blank');
+}
+
+// Copy URL on QR click
+document.querySelector('.qr-url').addEventListener('click', function() {
+  navigator.clipboard.writeText('https://yukisheikh.github.io/getting-to-know-yuki.github.io').then(() => {
+    this.textContent = '✓ Copied!';
+    setTimeout(() => { this.textContent = 'yukisheikh.github.io/getting-to-know-yuki.github.io'; }, 1800);
+  });
+});
+</script>
+</body>
+</html>
