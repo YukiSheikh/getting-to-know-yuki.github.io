@@ -27,12 +27,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#09090b;--s1:#111113;--s2:#18181b;--s3:#27272a;
-  --b1:#27272a;--b2:#3f3f46;--b3:#52525b;
-  --t1:#fafafa;--t2:#a1a1aa;--t3:#71717a;
-  --ac:#7c3aed;--acg:rgba(124,58,237,.28);
-  --cy:#06b6d4;--go:#f59e0b;--gr:#22c55e;--pu:#a78bfa;
-  --rd:#ef4444;
+  --bg:#f2f5f0;--s1:#ffffff;--s2:#edf2ea;--s3:#e2eade;
+  --b1:#d0e4ca;--b2:#b4cfac;--b3:#87ad7e;
+  --t1:#1a2e18;--t2:#3a5436;--t3:#5e7a58;
+  --ac:#2d6b4f;--acg:rgba(45,107,79,.18);
+  --cy:#0e7c72;--go:#b87a15;--gr:#1e8a40;--pu:#5e6e2c;
+  --rd:#a83232;
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif;
@@ -42,7 +42,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,s
 /* ── NAV ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
   display:flex;align-items:center;justify-content:space-between;padding:0 2rem;
-  background:rgba(9,9,11,.85);backdrop-filter:blur(20px) saturate(180%);
+  background:rgba(242,245,240,.94);backdrop-filter:blur(20px) saturate(180%);
   border-bottom:1px solid var(--b1)}
 .nw{font-size:.9rem;font-weight:700;letter-spacing:-.01em;color:var(--t1)}
 .nw em{font-style:normal;color:var(--t3);font-weight:400}
@@ -54,7 +54,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
 .np:hover{opacity:.85;transform:translateY(-1px)}
 .hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
 .hbg span{display:block;width:20px;height:2px;background:var(--t2);border-radius:2px}
-.mm{display:none;position:fixed;inset:56px 0 0;background:rgba(9,9,11,.97);
+.mm{display:none;position:fixed;inset:56px 0 0;background:rgba(242,245,240,.97);
   backdrop-filter:blur(20px);z-index:150;flex-direction:column;
   padding:2rem 1.5rem;gap:1.75rem;border-top:1px solid var(--b1)}
 .mm.open{display:flex}
@@ -62,7 +62,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
 .mm a:hover{color:var(--t1)}
 
 /* ── HERO ── */
-.hero{min-height:100svh;padding:56px 2rem 0;display:grid;place-items:center}
+.hero{min-height:100svh;padding:56px 2rem 0;display:grid;place-items:center;background:linear-gradient(135deg,#f2f5f0 0%,#e4ede0 50%,#dff0e8 100%)}
 .hi{max-width:1080px;width:100%;margin:0 auto;
   display:grid;grid-template-columns:1fr 380px;gap:3.5rem;align-items:center;padding:4rem 0}
 .he{display:flex;flex-direction:column}
@@ -75,7 +75,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:56px;
 h1.hn{font-size:clamp(2.8rem,6vw,5rem);font-weight:900;
   letter-spacing:-.04em;line-height:.92;margin-bottom:.85rem}
 h1.hn .sh{display:block;
-  background:linear-gradient(90deg,#a78bfa,#38bdf8,#a78bfa);
+  background:linear-gradient(90deg,#2d6b4f,#0e7c72,#2d6b4f);
   background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;animation:sh 4s linear infinite}
 @keyframes sh{0%{background-position:0%}100%{background-position:200%}}
@@ -87,8 +87,8 @@ h1.hn .sh{display:block;
 .bm{display:inline-flex;align-items:center;gap:.4rem;
   background:var(--ac);color:#fff;padding:.65rem 1.4rem;border-radius:10px;
   font-weight:700;font-size:.875rem;text-decoration:none;
-  transition:all .2s;box-shadow:0 0 24px var(--acg)}
-.bm:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--acg)}
+  transition:all .2s;box-shadow:0 4px 20px var(--acg)}
+.bm:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--acg)}
 .bg{display:inline-flex;align-items:center;gap:.4rem;
   background:var(--s2);color:var(--t2);border:1px solid var(--b2);
   padding:.65rem 1.2rem;border-radius:10px;
@@ -106,12 +106,12 @@ h1.hn .sh{display:block;
   box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04) inset;
   width:100%;max-width:320px;aspect-ratio:2/3}
 .pf img{width:100%;height:100%;object-fit:cover;object-position:top center;
-  display:block;filter:contrast(1.05) brightness(.97)}
+  display:block;filter:contrast(1.03) brightness(1.0)}
 .pf::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 60%,rgba(9,9,11,.65) 100%);
+  background:linear-gradient(180deg,transparent 60%,rgba(15,23,42,.35) 100%);
   pointer-events:none}
 .bf{position:absolute;z-index:10;
-  background:rgba(9,9,11,.88);backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
   border:1px solid var(--b2);border-radius:12px;
   padding:.55rem .8rem;display:flex;flex-direction:column;align-items:flex-start;
   white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.4)}
@@ -167,10 +167,10 @@ h1.hn .sh{display:block;
 .ewi strong{color:var(--t1)}
 .etgs{display:flex;flex-wrap:wrap;gap:.35rem}
 .tg{font-size:.67rem;font-weight:600;padding:.18rem .5rem;border-radius:6px;
-  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:var(--pu)}
-.tg.c{background:rgba(6,182,212,.1);border-color:rgba(6,182,212,.2);color:var(--cy)}
-.tg.g{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:var(--gr)}
-.tg.o{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2);color:var(--go)}
+  background:rgba(94,110,44,.08);border:1px solid rgba(94,110,44,.2);color:var(--pu)}
+.tg.c{background:rgba(14,124,114,.08);border-color:rgba(14,124,114,.2);color:var(--cy)}
+.tg.g{background:rgba(30,138,64,.08);border-color:rgba(30,138,64,.2);color:var(--gr)}
+.tg.o{background:rgba(184,122,21,.08);border-color:rgba(184,122,21,.2);color:var(--go)}
 
 /* ── WHY ── */
 .wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.85rem}
@@ -186,8 +186,8 @@ h1.hn .sh{display:block;
 /* ── CASE FLEX ── */
 .cf-hero{text-align:center;margin-bottom:2.5rem}
 .cf-badge{display:inline-flex;align-items:center;gap:.5rem;
-  background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(6,182,212,.1));
-  border:1px solid rgba(124,58,237,.3);
+  background:linear-gradient(135deg,rgba(45,107,79,.12),rgba(14,124,114,.08));
+  border:1px solid rgba(45,107,79,.3);
   color:var(--pu);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
   padding:.4rem 1rem;border-radius:100px;margin-bottom:1rem}
 .cf-tabs{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
